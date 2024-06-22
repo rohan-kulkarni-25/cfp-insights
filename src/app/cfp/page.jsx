@@ -1,5 +1,5 @@
 "use client";
-import NavbarComponent from "@/components/NavbarComponent";
+import NavbarComponent from "@/components/NavbarComponent.1";
 import InputSheet from "@/components/cfp/InputSheet";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

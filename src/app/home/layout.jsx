@@ -1,12 +1,13 @@
 "use client";
-import NavbarComponent from "@/components/NavbarComponent.1";
+
+import NavbarComponent from "@/components/NavbarComponent";
 import React from "react";
 
 const layout = ({ children }) => {
   return (
     <div>
       <NavbarComponent />
-      {children}
+      <div className="flex flex-row justify-center">{children}</div>
     </div>
   );
 };

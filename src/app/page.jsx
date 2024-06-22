@@ -1,10 +1,14 @@
-import SignInComponent from "@/components/SignInComponent";
-import Link from "next/link";
+import Head from "next/head";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      <Link href={"/auth"}>AUTH PAGE</Link>
-    </main>
+    <div>
+      <h1
+        style={{ fontSize: "8vw" }}
+        className="text-center font-bold underline underline-offset-8"
+      >
+        CFP-INSIGHTS
+      </h1>
+    </div>
   );
 }

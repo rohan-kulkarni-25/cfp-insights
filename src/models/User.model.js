@@ -1,6 +1,10 @@
 import mongoose, { Schema, Document } from "mongoose";
 
 const UserSchema = new Schema({
+  name: {
+    type: String,
+    required: [true, "Name is required"],
+  },
   username: {
     type: String,
     unique: true,
@@ -16,7 +20,6 @@ const UserSchema = new Schema({
   role: {
     type: String,
     required: [true, "Role is required"],
-    unique: true,
   },
 });
 

@@ -20,8 +20,10 @@ export async function POST(request) {
     }
 
     // Check if the user exists
-    let userAlredyExists = await UserModel.findOne({ email });
-    console.log(email);
+    let userAlredyExists = await UserModel.findOne({
+      $or: [{ email }, { username }],
+    });
+
     if (userAlredyExists) {
       return Response.json(
         {
@@ -32,13 +34,14 @@ export async function POST(request) {
         }
       );
     }
-
+    console.log(email, name, username, role);
     let newUser = await UserModel.create({
       email,
       name,
       username,
       role,
     });
+
     // Create New User
     return Response.json(
       {
@@ -47,6 +50,7 @@ export async function POST(request) {
       { status: 201 }
     );
   } catch (error) {
+    console.log(error);
     return Response.json(
       {
         error: new APIError(400, "Something went wrong while creating user.", [
