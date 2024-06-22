@@ -18,6 +18,7 @@ const page = () => {
           className="font-bold text-conference_primary"
         >
           REACT INDIA 2024
+          {/* CONFERENCE NAME */}
         </h1>
       </div>
 
