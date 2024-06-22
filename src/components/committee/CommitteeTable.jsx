@@ -6,15 +6,19 @@ import { columns } from "./columns";
 
 import { useToast } from "../ui/use-toast";
 import { getUsers } from "@/services/api/users/getUsers";
+import { useDispatch, useSelector } from "react-redux";
+import { updateUsers } from "@/store/Slices/usersSlice";
 
 const CommitteeTable = () => {
-  const [data, setData] = useState([]);
-  const { toast } = useToast();
+  const users = useSelector((state) => state.users.usersData);
+  console.log(users);
 
+  const { toast } = useToast();
+  const dispatch = useDispatch();
   const handleGetAllMembers = async () => {
     try {
       let response = await getUsers();
-      setData(response.data.data.data.users);
+      dispatch(updateUsers(response.data.data.data.users));
     } catch (error) {
       toast({
         variant: "destructive",
@@ -30,7 +34,7 @@ const CommitteeTable = () => {
 
   return (
     <div>
-      <DataTable columns={columns} data={data} />
+      <DataTable columns={columns} data={users} />
     </div>
   );
 };
