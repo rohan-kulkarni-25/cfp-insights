@@ -1,0 +1,17 @@
+export const data = [
+  { talkId: "1", name: "John" },
+  { talkId: "2", name: "Emma" },
+  { talkId: "3", name: "Michael" },
+  { talkId: "4", name: "Sophia" },
+  { talkId: "5", name: "William" },
+  { talkId: "6", name: "Olivia" },
+  { talkId: "7", name: "James" },
+  { talkId: "8", name: "Amelia" },
+  { talkId: "9", name: "Alexander" },
+  { talkId: "10", name: "Charlotte" },
+  { talkId: "11", name: "Elijah" },
+  { talkId: "12", name: "Isabella" },
+  { talkId: "13", name: "Liam" },
+  { talkId: "14", name: "Ava" },
+  { talkId: "15", name: "Benjamin" },
+];
