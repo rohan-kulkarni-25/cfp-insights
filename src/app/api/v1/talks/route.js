@@ -53,12 +53,17 @@ export async function GET() {
   await dbConnect();
 
   try {
+    let updatedTalks = [];
     let talks = await TalkModel.find();
+    talks.forEach((talk, index) => {
+      updatedTalks.push({ ...talk._doc, index });
+    });
+
     return Response.json(
       {
         data: new APIResponse(
           200,
-          { length: talks.length, talks },
+          { length: talks.length, talks: updatedTalks },
           "Talks Found"
         ),
       },
@@ -69,7 +74,7 @@ export async function GET() {
   } catch (error) {
     return Response.json(
       {
-        error: new APIError(400, "Something went wrong while adding talks.", [
+        error: new APIError(400, "Something went wrong while fetching talks.", [
           error.message,
         ]),
       },

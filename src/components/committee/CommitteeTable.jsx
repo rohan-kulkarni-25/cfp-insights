@@ -11,7 +11,6 @@ import { updateUsers } from "@/store/Slices/usersSlice";
 
 const CommitteeTable = () => {
   const users = useSelector((state) => state.users.usersData);
-  console.log(users);
 
   const { toast } = useToast();
   const dispatch = useDispatch();

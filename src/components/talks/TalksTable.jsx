@@ -1,21 +1,21 @@
 "use client";
 
 import * as React from "react";
-import { data } from "./data";
+
+import { useState, useEffect } from "react";
 
 import {
   flexRender,
   getCoreRowModel,
-  SortingState,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
+
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -32,12 +32,22 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { columns } from "./columns";
+import { getTalks } from "@/services/api/talks/getTalks";
+import { useDispatch, useSelector } from "react-redux";
+import { updateTalks } from "@/store/Slices/talksSlice";
+import { useToast } from "../ui/use-toast";
 
-export function DataTableDemo() {
-  const [sorting, setSorting] = React.useState([]);
-  const [columnFilters, setColumnFilters] = React.useState([]);
-  const [columnVisibility, setColumnVisibility] = React.useState({});
-  const [rowSelection, setRowSelection] = React.useState({});
+export function TalksTable() {
+  const data = useSelector((state) => state.talks.talksData);
+  const [sorting, setSorting] = useState([]);
+  const [columnFilters, setColumnFilters] = useState([]);
+  const [columnVisibility, setColumnVisibility] = useState({
+    _id: false,
+  });
+  const [rowSelection, setRowSelection] = useState({});
+
+  const dispatch = useDispatch();
+  const { toast } = useToast();
 
   const table = useReactTable({
     data,
@@ -61,14 +71,31 @@ export function DataTableDemo() {
     },
   });
 
+  const getAllTalks = async () => {
+    try {
+      let response = await getTalks();
+      dispatch(updateTalks(response.data.data.data.talks));
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: error.message,
+      });
+    }
+  };
+
+  useEffect(() => {
+    getAllTalks();
+  }, []);
+
   return (
-    <div className="w-3/4">
+    <div className="m-8">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter names..."
-          value={table.getColumn("name")?.getFilterValue() ?? ""}
+          placeholder="Filter talks..."
+          value={table.getColumn("talkTitle")?.getFilterValue() ?? ""}
           onChange={(event) =>
-            table.getColumn("name")?.setFilterValue(event.target.value)
+            table.getColumn("talkTitle")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
@@ -121,20 +148,22 @@ export function DataTableDemo() {
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
+              table.getRowModel().rows.map((row, index) => (
+                <>
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                </>
               ))
             ) : (
               <TableRow>
