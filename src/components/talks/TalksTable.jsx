@@ -89,7 +89,7 @@ export function TalksTable() {
   }, []);
 
   return (
-    <div className="m-8">
+    <div className="m-8 bg-white p-4 rounded-md">
       <div className="flex items-center py-4">
         <Input
           placeholder="Filter talks..."

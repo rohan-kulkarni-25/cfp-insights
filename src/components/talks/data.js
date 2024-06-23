@@ -1,10 +1,10 @@
 export const data = [
   {
-    index: 0,
-    talkTitle: "Understanding JavaScript Closures",
-    talkSummary: "A brief summary of closures in JavaScript",
-    talkDescription:
-      "An in-depth look into closures, how they work, and why they are useful in JavaScript.",
+    id: 0,
+    title: "The Future of Artificial Intelligence in Healthcare",
+    speaker: "Dr. Emily Johnson",
+    description: `Artificial Intelligence (AI) is transforming healthcare by enabling more accurate diagnostics, personalized treatment plans, and improved patient outcomes. Dr. Emily Johnson explores the latest advancements in AI, including machine learning algorithms that analyze medical data to predict disease progression and recommend optimized therapies. She discusses ethical considerations such as patient data privacy and the role of AI in reducing healthcare disparities. This talk provides insights into AI's potential to revolutionize healthcare delivery and improve global health outcomes.`,
+    summary: `Explore the transformative impact of Artificial Intelligence (AI) on healthcare, including diagnostics, personalized treatment, and ethical implications.`,
   },
   {
     index: 1,

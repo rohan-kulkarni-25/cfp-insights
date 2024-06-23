@@ -2,7 +2,7 @@
 import React from "react";
 
 const layout = ({ children }) => {
-  return <div>{children}</div>;
+  return <div className="w-full">{children}</div>;
 };
 
 export default layout;

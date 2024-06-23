@@ -32,7 +32,7 @@ const CommitteeTable = () => {
   }, []);
 
   return (
-    <div>
+    <div className="bg-white">
       <DataTable columns={columns} data={users} />
     </div>
   );
